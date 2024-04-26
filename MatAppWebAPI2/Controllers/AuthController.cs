@@ -72,10 +72,11 @@ namespace MatAppWebAPI2.Controllers
 			return Ok(user);
 		}
 
-		[Authorize]
+		//[Authorize]
 		[HttpGet("kalleanka")]
 		public async Task<IActionResult> Get()
 		{
+			
 			var prod = await _databaseContext.Products.Include(x => x.OrderProducts)!.ThenInclude(x => x.Order).FirstOrDefaultAsync(x => x.Id == Guid.Parse("5A6B645C-289A-4846-9061-13FB8F806DC9"));
 			var y = 0;
 			return Ok(prod);
