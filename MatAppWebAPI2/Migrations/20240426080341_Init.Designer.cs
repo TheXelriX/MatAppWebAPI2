@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MatAppWebAPI2.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240426002158_Init")]
+    [Migration("20240426080341_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -92,12 +92,12 @@ namespace MatAppWebAPI2.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("RestaurantId")
+                    b.Property<Guid>("UserRestaurantId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RestaurantId");
+                    b.HasIndex("UserRestaurantId");
 
                     b.ToTable("Products");
                 });
@@ -112,7 +112,6 @@ namespace MatAppWebAPI2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -174,13 +173,13 @@ namespace MatAppWebAPI2.Migrations
 
             modelBuilder.Entity("MatAppWebAPI2.Models.Product", b =>
                 {
-                    b.HasOne("MatAppWebAPI2.Models.User", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId")
+                    b.HasOne("MatAppWebAPI2.Models.User", "UserRestaurant")
+                        .WithMany("Products")
+                        .HasForeignKey("UserRestaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Restaurant");
+                    b.Navigation("UserRestaurant");
                 });
 
             modelBuilder.Entity("MatAppWebAPI2.Models.Order", b =>
@@ -195,6 +194,8 @@ namespace MatAppWebAPI2.Migrations
 
             modelBuilder.Entity("MatAppWebAPI2.Models.User", b =>
                 {
+                    b.Navigation("Products");
+
                     b.Navigation("UserCustomerOrders");
 
                     b.Navigation("UserRestaurantOrders");

@@ -8,12 +8,13 @@ namespace MatAppWebAPI2.Models
 	{
 		public Guid Id { get; set; }
 		public required string Name { get; set; }
-		public required string Email { get; set; }
+		public string? Email { get; set; }
 		public string? PhoneNumber {  get; set; }
 		public string? Description { get; set; }
 		public required string Password { get; set; }
 		public List<Order>? UserCustomerOrders { get; set; }
 		public List<Order>? UserRestaurantOrders { get; set; }
+		public List<Product>? Products { get; set; }
 		public UserType Type { get; set; }
     }
 

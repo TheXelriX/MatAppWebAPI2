@@ -3,6 +3,7 @@ using MatAppWebAPI2.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,13 +22,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddAuthorization(options =>
-{
-	//options.AddPolicy(AuthencationData.Policies.Owner, p =>
-		//p.RequireClaim(AuthkencationData.Claims.Owner, "true"));
-	//options.AddPolicy("",
-		//p => p.RequireClaim("Admin", "true"));
-});
+builder.Services.AddAuthorization();
 
 builder.Services.AddAuthentication(x =>
 {

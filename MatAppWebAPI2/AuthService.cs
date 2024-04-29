@@ -17,8 +17,7 @@ namespace MatAppWebAPI2
 			return new TokenModel()
 			{
 				Token = new JwtSecurityTokenHandler().WriteToken(token),
-				//RefreshToken = refreshToken,
-				//RefreshTokenExpirationDays = 10,
+				//Implementera refresh
 				TokenExpirationInMinutes = 60 * 24 * 10
 			};
 		}

@@ -72,6 +72,7 @@ namespace MatAppWebAPI2.Controllers
 			return Ok(user);
 		}
 
+		/*
 		//[Authorize]
 		[HttpGet("kalleanka")]
 		public async Task<IActionResult> Get()
@@ -81,5 +82,6 @@ namespace MatAppWebAPI2.Controllers
 			var y = 0;
 			return Ok(prod);
 		}
+		*/
 	}
 }

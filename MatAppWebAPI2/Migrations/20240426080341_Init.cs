@@ -17,7 +17,7 @@ namespace MatAppWebAPI2.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -61,15 +61,15 @@ namespace MatAppWebAPI2.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserRestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Users_RestaurantId",
-                        column: x => x.RestaurantId,
+                        name: "FK_Products_Users_UserRestaurantId",
+                        column: x => x.UserRestaurantId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -121,9 +121,9 @@ namespace MatAppWebAPI2.Migrations
                 column: "UserRestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_RestaurantId",
+                name: "IX_Products_UserRestaurantId",
                 table: "Products",
-                column: "RestaurantId");
+                column: "UserRestaurantId");
         }
 
         /// <inheritdoc />
